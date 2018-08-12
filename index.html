@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Purple Rain</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-color: blue; */
+        }
+
+        .rain-drop {
+            position: fixed;
+            background-color: purple;
+            width: 2px;
+            height: 20px;
+            animation: moveDown 1.5s;
+        }
+
+        @keyframes moveDown{
+            0% {
+                top: 0%;
+            }
+            /* 90% {
+                top: 98%;
+            } */
+            100% {
+                top: 110%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id='rain-toggler-plus' onclick="downpourMore()">More Rain</button>
+        <button id='rain-toggler-minus' onclick="downpourLess()">Less Rain</button>
+    </div>
+
+    <script>
+        let rainAmount = 1;
+        const rainDrop = document.getElementById('rain-drop')
+        const container = document.getElementById('container')
+
+        downpourMore = () => {
+            if(rainAmount < 4) {
+                rainAmount ++;
+            }
+            console.log(rainAmount)
+        }
+
+          downpourLess = () => {
+            if(rainAmount > 0) {
+                rainAmount--;
+            }
+            console.log(rainAmount)
+        }
+        
+        returnPercent = () => {
+            const percent = Math.floor(Math.random(1 + 100) * 100);
+            return percent;
+        }
+
+        createRainDrop = () => {      
+            const r = document.createElement('div')
+            r.classList.add('rain-drop')            
+            r.style.left = `${returnPercent()}%`
+            r.style.top=`110%`
+            container.appendChild(r)
+        }
+
+        setInterval(() => {
+            for(i=0; i<rainAmount; i++) {
+                createRainDrop();
+            }
+        }, 0010);
+    </script>
+</body>
+</html>
